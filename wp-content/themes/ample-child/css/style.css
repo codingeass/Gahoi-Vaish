@@ -1,0 +1,66 @@
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic|Share+Tech+Mono|Oxygen+Mono);
+body { 
+  font-family: 'Quattrocento Sans', sans-serif;
+}
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+body{
+	margin: 0.2%;
+	cursor: default;
+}
+#header_website #header_title{
+	font-size:3em;
+	margin-top: 30px;
+	margin-bottom: auto;
+}
+
+#html_views{
+	margin-bottom: 23px;
+}
+
+/* slider attractive*/
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #555861; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: none; 
+}
+/* Track */
+scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: grey; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+scrollbar-thumb:window-inactive {
+  background: none; 
+}
+	
+/*slider end*/
+
