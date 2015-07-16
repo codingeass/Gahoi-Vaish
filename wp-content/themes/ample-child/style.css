@@ -1,0 +1,24 @@
+/*
+Theme Name: Gahoi Vaish Samaj
+Theme URI : http://amandeepgupta.com
+Description : Modification
+Author : Amandeep Gupta
+Author URI: http://amandeepgupta.com
+Template: ample
+Version : 1.0
+*/
+@import url("../ample/style.css");
+
+.img-circle-def img{
+   border-radius: 60%;
+   height: 60%;
+}
+.img-circle-def .wc-gallery-captions-show .gallery-caption{
+   background-color:white; !important
+   background-color: none ;  
+}
+.img-circle-def .wp-caption-text .gallery-caption{
+   color: pink;
+   text-align: center;
+   background-color:white; !important  
+}
