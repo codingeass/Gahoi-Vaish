@@ -1,0 +1,61 @@
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic|Share+Tech+Mono|Oxygen+Mono);
+body { 
+  font-family: 'Quattrocento Sans', sans-serif;
+}
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+#form_login{
+	border:1px solid grey;
+	border-radius: 3px;
+	padding: 23px;
+}
+.panel-footer{
+	padding-bottom: 0px;
+}
+
+.login_description .col-md-6{
+	margin-bottom: 30px;
+}
+
+.login_description #search_button{
+	padding:0px; 
+}
+#message_section{
+	border:1px solid grey;
+	border-radius: 3px;
+	padding: 23px;
+	margin-bottom: 2em;
+}
+
+#message_block_r .list-group-item{
+	padding: 2em 1em;
+	border-left: none;
+	border-right: none;
+}
+
+#small_jumbotron{
+	padding-bottom:1.4em;
+	padding-top:1em; 
+	padding-left: 2em;
+}
+
+#img_button{
+	padding: 3px;
+}
+
+#message_block_r{
+	height: 400px;
+	overflow-y: scroll;
+}
+
+#users_message{
+	height: 410px;
+	overflow-y:scroll; 
+}
+
+#register_group_button{
+	display: none;
+}
