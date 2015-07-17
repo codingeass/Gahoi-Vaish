@@ -128,6 +128,19 @@
       </a>
       </li>
 
+      <li class="active" onclick="display_allow_user_section()">
+      <a href="#">
+        <span class="badge pull-left"></span>
+        <span class="glyphicon glyphicon-edit"></span> Allow Users
+      </a>
+      </li>
+
+      <li class="active" onclick="display_allow_user_section()">
+      <a href="#">
+        <span class="badge pull-left"></span>
+        <span class="glyphicon glyphicon-trash"></span> Delete Users
+      </a>
+      </li>
 
       <li class="active" style="display:none">
       <a href="#">
@@ -153,7 +166,7 @@
         <br/>
         <img src="../img/profile/<?php echo $image; ?>" alt="Profile Image" style="height:150px;" class="img-thumbnail">
         &nbsp;&nbsp;&nbsp;
-        <h2 style="display:inline-block;padding-top:2%;">@<?php echo $username; ?></h2>
+        <h2 style="display:inline-block;padding-top:2%;"><?php echo ucwords($fullName); ?></h2>
       </div>
 
 
@@ -188,80 +201,166 @@
         <form class="form-horizontal" name="updateProfile" action="updateprofile.php" method="post" enctype="multipart/form-data">
            
             <div class="form-group">
-                <label for="inputFullName" class="col-sm-2 control-label">Full Name</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputFullName" name="inputFullName" placeholder="Full Name" value="<?php echo ucwords($fullName); ?>" >
-                </div>
-              </div>
+                  <h3><div class="text-center" id="Login_header_text">Update Info</div></h3>
+               </div>
+               <hr/>
+                  
+                  <div class="form-group">
+                      <label for="inputFullName" class="col-sm-3 control-label">Full Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputFullName" name="inputFullName" placeholder="Full Name">
+                      </div>
+                    </div>
 
-            <div class="form-group">
-                <label for="inputUsername" class="col-sm-2 control-label">Username</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Username" value=<?php echo $username; ?>>
-                </div>
-              </div>
-            
-            <div class="form-group">
-                <label for="inputBirthday" class="col-sm-2 control-label">Date of Birth</label>
-                <div class="col-sm-10">
-                  <input type="date" name="inputBirthday" id="inputBirthday" value="<?php echo ($date_of_birth); ?>" ><br>
-                </div>
-              </div>
-            
-            <div class="form-group">
-                <label for="inputSex" class="col-sm-2 control-label">Sex</label>
-                <div class="col-sm-10">
-                  <label class="radio-inline">
-                  <input type="radio" name="inputSex" id="inputSex1" value="1" <?php if($gender=='male') echo "checked" ?> > Male
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="inputSex" id="inputSex2" value="2" <?php if($gender=='female') echo "checked" ?> > Female
-                </label>
-                </div>
-              </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Sex</label>
+                    <div class="col-sm-9">
+                      <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="sex1" name="sex" value="1"> Male
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="sex2" name="sex" value="2"> Female
+                      </label>
+                    </div>
+                    </div>
+                  <div class="form-group">
+                      <label for="inputBirthday" class="col-sm-3 control-label">Date of Birth</label>
+                      <div class="col-sm-9">
+                        <input type="date" class="form-control" name="inputBirthday" id="inputBirthday" placeholder="date">
+                      </div>
+                  </div>
 
-            <div class="form-group">
-                <label for="inputCity" class="col-sm-2 control-label">City</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="city" value="<?php echo ucwords($city); ?>" >
-                </div>
-              </div>
+                  <div class="form-group">
+                      <label for="inputFH" class="col-sm-3 control-label">Father/Husband</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputFH" name="inputFH" placeholder="Full Name">
+                      </div>
+                    </div>
 
-              <div class="form-group">
-                <label for="inputState" class="col-sm-2 control-label">State</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputState" name="inputState" placeholder="State" value="<?php echo ucwords($state);?>" >
-                </div>
-              </div>
+                    <div class="form-group">
+                      <label for="inputGotra" class="col-sm-3 control-label">Gotra</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputGotra" name="inputGotra" placeholder="eg. Gagal">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="inputAakana" class="col-sm-3 control-label">Aakana</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputAakana" name="inputAakana" placeholder="eg. Nogariya">
+                      </div>
+                    </div>
 
-              <div class="form-group">
-                <label for="inputCountry" class="col-sm-2 control-label">Country</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputCountry" name="inputCountry" placeholder="Country" value="<?php echo ucwords($country);?>" >
-                </div>
-              </div>
+                    <div class="form-group">
+                      <label for="inputDomicile" class="col-sm-3 control-label">Domicile</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputDomicile" name="inputDomicile" placeholder="Lucknow">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputBlood" class="col-sm-3 control-label">Blood Group</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputBlood" name="inputBlood" placeholder="B+">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputEducation" class="col-sm-3 control-label">Education</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputEducation" name="inputEducation" placeholder="Full Name">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputOccupation" class="col-sm-3 control-label">Occupation</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputOccupation" name="inputOccupation" placeholder="Occupation">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputCompany" class="col-sm-3 control-label">Company Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputCompany" name="inputCompany" placeholder="Company">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputAddress" class="col-sm-3 control-label">Residency Address</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="address">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputCity" class="col-sm-3 control-label">City</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="City">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputState" class="col-sm-3 control-label">State</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputState" name="inputState" placeholder="Uttar Pradesh">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="inputPincode" class="col-sm-3 control-label">Pincode</label>
+                      <div class="col-sm-9">
+                        <input type="number" class="form-control" id="inputPincode" name="inputPincode" placeholder="226010">
+                      </div>
+                    </div>
+                   
 
 
-            <div class="form-group">
-                <label for="inputAboutMe" class="col-sm-2 control-label">About Me</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" id="inputAboutMe" rows="5" name="inputAboutMe"><?php echo ($about_me);?></textarea>
-                </div>
-              </div>
-            
-           <div class="form-group">
-                <label for="inputProfileImage" class="col-sm-2 control-label">Profile Image</label>
-                <div class="col-sm-10">
-                  <input type="file" id="inputProfileImage" name="inputProfileImage">
-                </div>
-              </div>
 
-              <div class="form-group">
-                <label for="inputWallImage" class="col-sm-2 control-label">Wall Image</label>
-                <div class="col-sm-10">
-                  <input type="file" id="inputWallImage" name="inputWallImage">
-                </div>
-              </div>
+
+
+                  <div class="form-group">
+                      <label for="inputMarital" class="col-sm-3 control-label">Marital Status</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" id="inputMarital" name="inputMarital">
+                          <option>--Select Marital Status--</option>
+                          <option>Married</option>
+                          <option>Unmarried</option>
+                          <option>Widow</option>
+                          <option>Divorce</option>
+                          <option>Widower</option>
+                        </select>
+                     </div>
+                    </div>              
+                  
+                  <div class="form-group">
+                      <label for="inputMobile" class="col-sm-3 control-label">Mobile No.</label>
+                      <div class="col-sm-9">
+                        <input type="number" class="form-control" id="inputMobile" name="inputMobile" placeholder="9898989898">
+                      </div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="inputLandline" class="col-sm-3 control-label">Landline No.</label>
+                      <div class="col-sm-9">
+                        <input type="number" class="form-control" id="inputLandline" name="inputLandline" placeholder="9898989898">
+                      </div>
+                  </div>
+                  
+
+                  <div class="form-group">
+                    <label for="inputProfileImage" class="col-sm-3 control-label">Profile Image</label>
+                    <div class="col-sm-9">
+                      <input type="file" id="inputProfileImage" name="inputProfileImage">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputWallImage" class="col-sm-3 control-label">Wall Image</label>
+                    <div class="col-sm-9">
+                      <input type="file" id="inputWallImage" name="inputWallImage">
+                    </div>
+                  </div>
 
             <div class="form-group text-center">
               <div class="">

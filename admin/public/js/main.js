@@ -216,14 +216,6 @@ function profile_search()
     }
 }
 
-function content_message(page){
-  content_change(page,"html");
-    document.getElementById('display_profile_section').style.display="none";
-  document.getElementById('edit_profile_section').style.display="none";
-  document.getElementById('change_password_section').style.display="none"; 
-  document.getElementById('wall_display_section').style.display="none";
-  alert("This is a demo section");
-}
 
 function display_profile_section(){
   document.getElementById('view_display').innerHTML="";
@@ -258,6 +250,14 @@ function content_change(page,extension){
       }
     }         
   }
+}
+
+function display_allow_user_section(){
+  document.getElementById('display_profile_section').style.display="none";
+  document.getElementById('edit_profile_section').style.display="none";
+  document.getElementById('change_password_section').style.display="none"; 
+  document.getElementById('wall_display_section').style.display="none";
+  content_change('users',"php");
 }
 
 function display_search_section(){
