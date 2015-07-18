@@ -23,7 +23,7 @@ if(isset($_REQUEST['inputBirthday'])){
 if(isset($_REQUEST['sex'])){
 	if($_REQUEST['sex']!="")
 	{
-		$sex=mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['sex'])))));
+		$sex=mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['sex'])))));
 		if($sex=="1")	
 			$sex='1';
 		else
