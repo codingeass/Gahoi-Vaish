@@ -1,20 +1,18 @@
 <?php
 	try {
-    require_once("../php/connect.php");///? check for this
-    session_start();
-    
-    if (isset($_REQUEST['id'])) {
-      $id=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST['id']))));
-      $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."' and privileges=1;");
+    require_once("../php/connect.php");
+    if (isset($_REQUEST['email'])) {
+      $email=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST['email']))));
+      $result=mysqli_query($mysql,"SELECT id FROM user WHERE `email`='".$email."'");
       if(mysqli_num_rows($result) > 0){
-        $query="update verification set `verified`=1 where idverification=".$id."";
-        $res=mysqli_query($mysql,$query)
-        or die("Already verified");
-        $confirm_code=0;
+        $id=0;
+        while ($res=mysqli_fetch_assoc($result)) {
+          $id=$res['id'];
+          break;
+        }
         $result_sub=mysqli_query($mysql,"SELECT * FROM verification WHERE idverification=".$id."");
         while ($res_sub=mysqli_fetch_assoc($result)) {
           $confirm_code=$res_sub['verification_code'];
-          break;
         }
         try
         {
@@ -65,7 +63,7 @@
       }
       else
       {
-        echo "You Don't have Privilages"
+        echo "Email Not Registered"
       }
     }
     else

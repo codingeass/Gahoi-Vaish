@@ -1,24 +1,15 @@
 <?php
 	try {
-    require_once("../php/connect.php");///? check for this
-    session_start();
-    
-    if (isset($_REQUEST['id'])) {
-      $id=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST['id']))));
-      $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."' and privileges=1;");
-      if(mysqli_num_rows($result) > 0){
-        $query="update verification set `verified`=1 where idverification=".$id."";
-        $res=mysqli_query($mysql,$query)
-        or die("Already verified");
-        $confirm_code=0;
-        $result_sub=mysqli_query($mysql,"SELECT * FROM verification WHERE idverification=".$id."");
-        while ($res_sub=mysqli_fetch_assoc($result)) {
-          $confirm_code=$res_sub['verification_code'];
-          break;
-        }
+    require_once("connect.php");
+    if(isset($_REQUEST["email"])){
+    $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".urldecode(strip_tags($_REQUEST["email"]))."' ;");
+    if(mysqli_num_rows($result) > 0){
+        $confirm_code=md5(uniqid(rand()));
+        $result=mysqli_query($mysql,"insert into password_recovery (email,code) values('".urldecode(strip_tags($_REQUEST["email"]))."','".$confirm_code."')");        
+        
         try
         {
-            $message="Click on the below URL to activate your account :<br/> <a href= 'http://localhost/wordpress-4.2.2/wordpress/admin/public/php/confirmAccount.php?id=".urldecode($id)."&code=".urldecode($confirm_code)."'>http://localhost/wordpress-4.2.2/wordpress/admin/public/php/confirmAccount.php?id=".urldecode($id)."&code=".urldecode($confirm_code)."</a>";
+            $message="Click on the below URL to recover your password :<br/> <a href= 'http://localhost/wordpress-4.2.2/wordpress/admin/public/php/forgotpass.php?email=".urldecode($_REQUEST["email"])."&code=".urldecode($confirm_code)."'>http://localhost/wordpress-4.2.2/wordpress/admin/public/php/forgotpass.php?email=".urldecode($_REQUEST["email"])."&code=".urldecode($confirm_code)."</a>";
           
             require 'PHPMailerAutoload.php';
  
@@ -42,7 +33,7 @@
             //$mail->addAttachment('20725.jpg', 'new.jpg'); // Optional name
             $mail->isHTML(true);                                  // Set email format to HTML
              
-            $mail->Subject = 'Account Verification : Gahoi Vaish Samaj';
+            $mail->Subject = 'Password Recovery : Gahoi Vaish Samaj';
             $mail->Body    = $message;
             $mail->AltBody = $message;
              
@@ -62,16 +53,14 @@
             echo "Mailing Problem";
           }
 
-      }
-      else
-      {
-        echo "You Don't have Privilages"
-      }
     }
-    else
-      echo "Error occurred";
-
-  } catch (Exception $e) {
-    echo "Error occurred";
-  }
+      else{
+     echo "Invalid Email";
+      }  
+  }else{
+     echo "Try Again Later"; 
+ }
+	} catch (Exception $e) {
+		echo $e->message;
+	}
 ?>

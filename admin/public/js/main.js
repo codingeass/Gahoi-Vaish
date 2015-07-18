@@ -286,18 +286,8 @@ function view_other_profile(email){
   content_change('otherProfile',"php?email="+email);
 }
 
-function friend_search()
+function verify_account(id)
 {
-  document.getElementById('display_profile_section').style.display="none";
-  document.getElementById('edit_profile_section').style.display="none";
-  document.getElementById('change_password_section').style.display="none"; 
-  document.getElementById('wall_display_section').style.display="none";
-  document.getElementById('view_display').style.display="inline-block";
-  friend_search_get();
-}
-
-function friend_search_get()
-{ 
     var xmlhttp=false;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -309,94 +299,20 @@ function friend_search_get()
     }
     if(xmlhttp)
     {
-      xmlhttp.open("GET",'friendList.php');
+      xmlhttp.open("GET",'approve.php?id='+id);
       xmlhttp.send();
       xmlhttp.onreadystatechange=function()
       {
         if(xmlhttp.readyState==4 && xmlhttp.status==200)
           {
-             //var xmlDoc=xmlhttp.responseText;
-             var xmlDoc = jQuery.parseXML(xmlhttp.responseText);
-             //xd=xmlDoc.getElementsByTagName("search_result");
-             x=xmlDoc.getElementsByTagName("profile");
-            var mk="";
-            for (i=0;i<x.length;i++)
-            {
-              mk+='<div class="media" >\
-  <a class="pull-left" onclick="view_other_profile(\''+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'\')" href="#">\
-    <img class="media-object" height="50px;" src="../img/profile/'+x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue+'" alt="profile">\
-  </a>\
-  <div class="media-body">\
-    <h4 class="media-heading" style="cursor:pointer;" onclick="view_other_profile(\''+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'\')">'+x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue+'</h4>\
-    '+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'<br/>'+x[i].getElementsByTagName("address")[0].childNodes[0].nodeValue+'\
-  </div>\
-</div>';
-    }
-            document.getElementById('view_display').innerHTML=mk;
+             var xmlDoc=xmlhttp.responseText;
           }
       }
-    }
+    }  
 }
 
-function FriendRequest_type_get(id,page){
-  var xmlhttp=false;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    if(xmlhttp)
-    {
-      xmlhttp.open("GET",page+'.php?id='+id);
-      xmlhttp.send();
-      xmlhttp.onreadystatechange=function()
-      {
-        if(xmlhttp.readyState==4 && xmlhttp.status==200)
-          {
-
-          }
-      }
-    }
-}
-
-
-function sendFriendRequest(id,email){
-  FriendRequest_type_get(id,'sendFriendRequest');
-  view_other_profile(email);
-}
-
-function AcceptRequest(id,email){
-  FriendRequest_type_get(id,'AcceptRequest');
-  view_other_profile(email);
-}
-
-function deleteFriendRequest(id,email){
-  FriendRequest_type_get(id,'deleteFriendRequest');
-  view_other_profile(email);
-}
-
-
-function UnfriendRequest(id,email){
-  FriendRequest_type_get(id,'Unfriend');
-  view_other_profile(email);
-}
-
-
-function friend_request()
+function verify_account(id)
 {
-  document.getElementById('display_profile_section').style.display="none";
-  document.getElementById('edit_profile_section').style.display="none";
-  document.getElementById('change_password_section').style.display="none"; 
-  document.getElementById('wall_display_section').style.display="none";
-  document.getElementById('view_display').style.display="inline-block";
-  friend_request_get();
-}
-
-function friend_request_get()
-{ 
     var xmlhttp=false;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -408,31 +324,39 @@ function friend_request_get()
     }
     if(xmlhttp)
     {
-      xmlhttp.open("GET",'friendRequest.php');
+      xmlhttp.open("GET",'approve.php?id='+id);
       xmlhttp.send();
       xmlhttp.onreadystatechange=function()
       {
         if(xmlhttp.readyState==4 && xmlhttp.status==200)
           {
-             //var xmlDoc=xmlhttp.responseText;
-             var xmlDoc = jQuery.parseXML(xmlhttp.responseText);
-             //xd=xmlDoc.getElementsByTagName("search_result");
-             x=xmlDoc.getElementsByTagName("profile");
-            var mk="";
-            for (i=0;i<x.length;i++)
-            {
-              mk+='<div class="media" >\
-  <a class="pull-left" onclick="view_other_profile(\''+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'\')" href="#">\
-    <img class="media-object" height="50px;" src="../img/profile/'+x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue+'" alt="profile">\
-  </a>\
-  <div class="media-body">\
-    <h4 class="media-heading" style="cursor:pointer;" onclick="view_other_profile(\''+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'\')">'+x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue+'</h4>\
-    '+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'<br/>'+x[i].getElementsByTagName("address")[0].childNodes[0].nodeValue+'\
-  </div>\
-</div>';
-    }
-            document.getElementById('view_display').innerHTML=mk;
+             var xmlDoc=xmlhttp.responseText;
           }
       }
+    }  
+}
+
+function delete_account(id)
+{
+    var xmlhttp=false;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
     }
+    else
+    {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if(xmlhttp)
+    {
+      xmlhttp.open("GET",'disapprove.php?id='+id);
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+             var xmlDoc=xmlhttp.responseText;
+          }
+      }
+    } 
 }
