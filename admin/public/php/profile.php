@@ -28,46 +28,73 @@
     require_once("connect.php");
     session_start();
     if(isset($_SESSION["email"])){
-    $result=mysqli_query($mysql,"SELECT * FROM userprofile WHERE `email`='".strip_tags($_SESSION["email"])."'");
+    $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."'");
     if(mysqli_num_rows($result) > 0){
         while($res=mysqli_fetch_assoc($result))
         {
           $id=$res['id'];
+          $name=$res['name'];
           $image=$res['image_location'];
           $wall=$res['wall_location'];
-          $username=$res['username'];
-          if($res['gender']=='1')
+          $mobile=$res['mobile_no'];
+          if($res['sex']=='1')
           {
             $gender="male";
           }
           else
-            if($res['gender']=='2')
+            if($res['sex']=='2')
             $gender="female";
           else
             $gender="";
 
           $email=$res['email'];
-          $about_me=$res['About Me'];
+          if($res['Marital Status']=='1')
+          {
+            $marital="Married";
+          }
+          else
+            if($res['Marital Status']=='2')
+            $marital="Unmarried";
+          else
+            if($res['Marital Status']=='3')
+            $marital="Widow";
+          else
+            if($res['Marital Status']=='4')
+            $marital="Divorce";
+          else
+            if($res['Marital Status']=='5')
+            $marital="Widower";
+          else
+            if($res['Marital Status']=='0')
+            $marital="";
+          else  
+            $marital="";
+
           $date_of_birth=$res['date_of_birth'];
-          $city=$res['city'];
-          if(empty($image))
-          echo "Hello World";
-          $country=$res['country'];
-          $state=$res['state'];
-          $website=$res['website'];
-          $facebook=$res['facebook_username'];
-          $twitter=$res['twitter_username'];
-          $fullName=$res['Full Name'];
+          $fatherHus=$res['Father_husband'];
+          $domicile=$res['domicile'];
+          $address=$res['residence_address'];
+          $city=$res['residence_city'];
+          $state=$res['residence_state'];
+          $pincode=$res['pincode'];
+          $landline=$res['landline_no'];
+          $bloodGroup=$res['bloodGroup'];
+          $education=$res['Education'];
+          $occupation=$res['Occupation'];
+          $gotra=$res['gotra'];
+          $aakana=$res['aakana'];
+          $company=$res['company_name'];
+          $privileges=$res['privileges'];
           //print_r($res);
           break;
         }
     }
       else{
-     echo "<script>window.location.assign('../views/login.html');</script>";
+     echo "<script>window.location.assign('../../index.html');</script>";
      die();
       }  
   }else{
-     echo "<script>window.location.assign('../views/login.html');</script>";
+     echo "<script>window.location.assign('../../index.html');</script>";
      die();
       } 
 }
@@ -83,7 +110,7 @@
       <a type="button" class="btn btn-default" id="img_button" href=""><img class="media-object" src="../img/profile/<?php echo $image; ?>" alt="profile picture" style="height:50px;"></a>
       <div class="btn-group">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span id="message_username"><?php echo ucwords($fullName); ?></span> <span class="caret"></span>
+        <span id="message_username"><?php echo ucwords($name); ?></span> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
         <li><a href="#" onclick="Edit_profile()">Edit Profile</a></li>
@@ -166,7 +193,7 @@
         <br/>
         <img src="../img/profile/<?php echo $image; ?>" alt="Profile Image" style="height:150px;" class="img-thumbnail">
         &nbsp;&nbsp;&nbsp;
-        <h2 style="display:inline-block;padding-top:2%;"><?php echo ucwords($fullName); ?></h2>
+        <h2 style="display:inline-block;padding-top:2%;"><?php echo ucwords($name); ?></h2>
       </div>
 
 
@@ -177,10 +204,8 @@
 
       <div class="col-md-8" id="display_profile_section" style="font-size:18px;display:inline-block;" id="profile_view_text">
         <dl class="dl-horizontal">
-          <dt>Username :</dt>
-          <dd><?php echo $username; ?> &nbsp;&nbsp; </dd>
           <dt>Name :</dt>
-          <dd><?php echo ucwords($fullName); ?></dd>
+          <dd><?php echo ucwords($name); ?></dd>
           <dt>Email :</dt>
           <dd><?php echo $email; ?></dd>
           <dt>Sex :</dt>
@@ -188,11 +213,30 @@
           <dt>Date of Birth :</dt>
           <dd><?php echo $date_of_birth; ?></dd>
           <dt>Lives :</dt>
-          <dd><?php echo ucwords($city) . ', '.ucwords($state).', '.ucwords($country); ?></dd>
-          <dt>About Me :</dt>
-          <dd>
-            <?php echo ($about_me); ?>
-          </dd>
+          <dd><?php echo ucwords($address) . ', '. ucwords($city) . ', '.ucwords($state).'- '.ucwords($pincode); ?></dd>
+          <dt>Mobile No. :</dt>
+          <dd><?php echo $mobile; ?></dd>
+          <dt>Marital Status :</dt>
+          <dd><?php echo $marital; ?></dd>
+          <dt>Father/Husband :</dt>
+          <dd><?php echo $fatherHus; ?></dd>
+          <dt>Domicile :</dt>
+          <dd><?php echo $domicile; ?></dd>
+          <dt>Landline No. :</dt>
+          <dd><?php echo $landline; ?></dd>
+          <dt>bloodGroup :</dt>
+          <dd><?php echo $bloodGroup; ?></dd>
+          <dt>Education :</dt>
+          <dd><?php echo $education; ?></dd>
+          <dt>Occupation :</dt>
+          <dd><?php echo $occupation; ?></dd>
+          <dt>Gotra :</dt>
+          <dd><?php echo $gotra; ?></dd>
+          <dt>Aakana :</dt>
+          <dd><?php echo $aakana; ?></dd>
+          <dt>Company :</dt>
+          <dd><?php echo $company; ?></dd>
+          
           
         </dl>
       </div>
@@ -208,7 +252,7 @@
                   <div class="form-group">
                       <label for="inputFullName" class="col-sm-3 control-label">Full Name</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputFullName" name="inputFullName" placeholder="Full Name">
+                        <input type="text" class="form-control" id="inputFullName" name="inputFullName" placeholder="Full Name" value="<?php echo ($name); ?>">
                       </div>
                     </div>
 
@@ -216,101 +260,101 @@
                     <label class="col-sm-3 control-label">Sex</label>
                     <div class="col-sm-9">
                       <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="sex1" name="sex" value="1"> Male
+                        <input type="radio"  id="sex1" name="sex" value="1" <?php if($gender=='male') echo "checked" ?> > Male
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="sex2" name="sex" value="2"> Female
+                        <input type="radio" id="sex2" name="sex" value="2" <?php if($gender=='female') echo "checked" ?>> Female
                       </label>
                     </div>
                     </div>
                   <div class="form-group">
                       <label for="inputBirthday" class="col-sm-3 control-label">Date of Birth</label>
                       <div class="col-sm-9">
-                        <input type="date" class="form-control" name="inputBirthday" id="inputBirthday" placeholder="date">
+                        <input type="date" class="form-control" name="inputBirthday" id="inputBirthday" value="<?php echo ($date_of_birth); ?>">
                       </div>
                   </div>
 
                   <div class="form-group">
                       <label for="inputFH" class="col-sm-3 control-label">Father/Husband</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputFH" name="inputFH" placeholder="Full Name">
+                        <input type="text" class="form-control" id="inputFH" name="inputFH" placeholder="Full Name" value="<?php echo ($fatherHus); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputGotra" class="col-sm-3 control-label">Gotra</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputGotra" name="inputGotra" placeholder="eg. Gagal">
+                        <input type="text" class="form-control" id="inputGotra" name="inputGotra" placeholder="eg. Gagal" value="<?php echo ($gotra); ?>">
                       </div>
                     </div>
                     
                     <div class="form-group">
                       <label for="inputAakana" class="col-sm-3 control-label">Aakana</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputAakana" name="inputAakana" placeholder="eg. Nogariya">
+                        <input type="text" class="form-control" id="inputAakana" name="inputAakana" placeholder="eg. Nogariya" value="<?php echo ($aakana); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputDomicile" class="col-sm-3 control-label">Domicile</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputDomicile" name="inputDomicile" placeholder="Lucknow">
+                        <input type="text" class="form-control" id="inputDomicile" name="inputDomicile" placeholder="Lucknow" value="<?php echo ($domicile); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputBlood" class="col-sm-3 control-label">Blood Group</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputBlood" name="inputBlood" placeholder="B+">
+                        <input type="text" class="form-control" id="inputBlood" name="inputBlood" placeholder="B+" value="<?php echo ($bloodGroup); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputEducation" class="col-sm-3 control-label">Education</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEducation" name="inputEducation" placeholder="Full Name">
+                        <input type="text" class="form-control" id="inputEducation" name="inputEducation" placeholder="Full Name" value="<?php echo ($education); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputOccupation" class="col-sm-3 control-label">Occupation</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputOccupation" name="inputOccupation" placeholder="Occupation">
+                        <input type="text" class="form-control" id="inputOccupation" name="inputOccupation" placeholder="Occupation" value="<?php echo ($occupation); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputCompany" class="col-sm-3 control-label">Company Name</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputCompany" name="inputCompany" placeholder="Company">
+                        <input type="text" class="form-control" id="inputCompany" name="inputCompany" placeholder="Company" value="<?php echo ($company); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputAddress" class="col-sm-3 control-label">Residency Address</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="address">
+                        <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="address" value="<?php echo ($address); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputCity" class="col-sm-3 control-label">City</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="City">
+                        <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="City" value="<?php echo ($city); ?>">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputState" class="col-sm-3 control-label">State</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputState" name="inputState" placeholder="Uttar Pradesh">
+                        <input type="text" class="form-control" id="inputState" name="inputState" placeholder="Uttar Pradesh" value="<?php echo ($state); ?>">
                       </div>
                     </div>
                     
                     <div class="form-group">
                       <label for="inputPincode" class="col-sm-3 control-label">Pincode</label>
                       <div class="col-sm-9">
-                        <input type="number" class="form-control" id="inputPincode" name="inputPincode" placeholder="226010">
+                        <input type="number" class="form-control" id="inputPincode" name="inputPincode" placeholder="226010" value="<?php echo ($pincode); ?>">
                       </div>
                     </div>
                    
@@ -323,12 +367,47 @@
                       <label for="inputMarital" class="col-sm-3 control-label">Marital Status</label>
                       <div class="col-sm-9">
                         <select class="form-control" id="inputMarital" name="inputMarital">
-                          <option>--Select Marital Status--</option>
-                          <option>Married</option>
-                          <option>Unmarried</option>
-                          <option>Widow</option>
-                          <option>Divorce</option>
-                          <option>Widower</option>
+                          <?php 
+                            if(!isset($marital) || $martial=="")
+                            {
+                                echo "<option value='0'>--Select Marital Status--</option>";
+                                echo "<option value='1'>Married</option><option value='2'>Unmarried</option><option value='3'>Widow</option><option value='4'>Divorce</option><option value='5'>Widower</option>";
+                            }
+                            else
+                            if($marital=="Married")
+                            {
+                                echo "<option value='0'>--Select Marital Status--</option>";
+                                echo "<option value='1' selected>Married</option><option value='2'>Unmarried</option><option value='3'>Widow</option><option value='4'>Divorce</option><option value='5'>Widower</option>";  
+                            }
+                            else
+                            if($marital=="Unmarried")
+                            {
+                                echo "<option value='0'>--Select Marital Status--</option>";
+                                echo "<option value='1'>Married</option><option value='2' selected>Unmarried</option><option value='3'>Widow</option><option value='4'>Divorce</option><option value='5'>Widower</option>";
+
+                            }
+                            else
+                            if($marital=="Widow")
+                            {
+                                echo "<option value='0'>--Select Marital Status--</option>";
+                                echo "<option value='1'>Married</option><option value='2'>Unmarried</option><option value='3' selected>Widow</option><option value='4'>Divorce</option><option value='5'>Widower</option>";
+                              
+                            }
+                            else
+                            if($marital=="Divorce")
+                            {
+                                echo "<option value='0'>--Select Marital Status--</option>";
+                                echo "<option value='1'>Married</option><option value='2'>Unmarried</option><option value='3'>Widow</option><option selected value='4'>Divorce</option><option value='5'>Widower</option>";
+                              
+                            }
+                            else
+                            if($marital=="Widower")
+                            {
+                                echo "<option value='0'>--Select Marital Status--</option>";
+                                echo "<option value='1'>Married</option><option value='2'>Unmarried</option><option value='3'>Widow</option><option value='4'>Divorce</option><option value='5' selected>Widower</option>";
+                              
+                            }
+                           ?>
                         </select>
                      </div>
                     </div>              
@@ -336,14 +415,14 @@
                   <div class="form-group">
                       <label for="inputMobile" class="col-sm-3 control-label">Mobile No.</label>
                       <div class="col-sm-9">
-                        <input type="number" class="form-control" id="inputMobile" name="inputMobile" placeholder="9898989898">
+                        <input type="number" class="form-control" id="inputMobile" name="inputMobile" placeholder="9898989898" value="<?php echo ($mobile); ?>">
                       </div>
                   </div>
                   
                   <div class="form-group">
                       <label for="inputLandline" class="col-sm-3 control-label">Landline No.</label>
                       <div class="col-sm-9">
-                        <input type="number" class="form-control" id="inputLandline" name="inputLandline" placeholder="9898989898">
+                        <input type="number" class="form-control" id="inputLandline" name="inputLandline" placeholder="9898989898" value="<?php echo ($landline); ?>">
                       </div>
                   </div>
                   
@@ -383,7 +462,7 @@
         
         <form class="form-horizontal" action="" method="post" onsubmit="return false">           
             <div class="form-group">
-                <label for="inputOldPassword" class="col-sm-4 control-label">Confirm Password</label>
+                <label for="inputOldPassword" class="col-sm-4 control-label">Old Password</label>
                 <div class="col-sm-8">
                   <input type="password" class="form-control" id="inputOldPassword" name="inputOldPassoword" placeholder="***********">
                 </div>

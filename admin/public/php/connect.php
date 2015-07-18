@@ -4,7 +4,7 @@
  *
  * @author Amandeep Gupta <amandeeptheviper@gmail.com>
  */
-        	$mysql=mysqli_connect("localhost","root","netbean","viralfever")
+        	$mysql=mysqli_connect("localhost","root","netbean","wordpress")
         				or die ("Cannot connect to database");
 			if (mysqli_connect_errno())
 			{

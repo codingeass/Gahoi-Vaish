@@ -1,12 +1,11 @@
-
 function login_user(){
-    var email = document.getElementById('inputEmail').value;
+  var email = document.getElementById('inputEmail').value;
   var password = document.getElementById('inputPassword').value;
   if(email=="" || password == "")
   {  
     document.getElementById('error_message').innerHTML="Incomplete Fields";
-      return;
-   }
+    return;
+  }
 
   var xmlhttp=false;
     if (window.XMLHttpRequest)
@@ -30,7 +29,18 @@ function login_user(){
             document.getElementById('error_message').innerHTML="Email or Password is Wrong";
           }
           else
+          if(xmlhttp.responseText=="4")
           {
+            document.getElementById('error_message').innerHTML="Account not verified by Admin";
+          }
+          else
+          if(xmlhttp.responseText=="3")
+          {
+            document.getElementById('error_message').innerHTML="Check you account for activation Email";
+          }
+          else
+          {
+            document.getElementById('error_message').innerHTML=xmlhttp.responseText;
             window.location="public/php/profile.php";
           }
         }
@@ -55,6 +65,7 @@ function login_back(){
     document.getElementById('button_back').style.display="none";
     document.getElementById('button_register').style.display="none";
     document.getElementById('button__register').style.display="inline-block";
+    document.getElementById('error_message').innerHTML="";
 }
 
 function login_register(){
@@ -62,7 +73,7 @@ function login_register(){
   var password = document.getElementById('inputPassword').value;
   var cpassword = document.getElementById('inputConfirmPassword').value;
   var name = document.getElementById('inputFullName').value;
-  var username = document.getElementById('inputUsername').value;
+  var mobile = document.getElementById('inputMobile').value;
 
   if(password!=cpassword)
   {
@@ -85,21 +96,21 @@ function login_register(){
     }
     if(xmlhttp)
     {
-      xmlhttp.open("GET",'public/php/reg.php?email='+encodeURIComponent(email)+'&pass='+encodeURIComponent(password)+'&name='+encodeURIComponent(name)+'&username='+encodeURIComponent(username));
+      xmlhttp.open("GET",'public/php/reg.php?email='+encodeURIComponent(email)+'&pass='+encodeURIComponent(password)+'&name='+encodeURIComponent(name)+'&mobile='+encodeURIComponent(mobile));
       xmlhttp.send();
       xmlhttp.onreadystatechange=function()
       {
         if(xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
           if(xmlhttp.responseText=="1")
           {
-            check_user=1;
             alert("Register Yourself");
           }
           else
           {
             document.getElementById('error_message').innerHTML=xmlhttp.responseText;
-             window.location="public/php/profile.php"; 
           }
+        }
       }
     }
 }
