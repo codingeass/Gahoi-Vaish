@@ -8,7 +8,7 @@ if( isset($_REQUEST["name"]) && isset($_REQUEST["email"]) && isset($_REQUEST["pa
     {
         exit ('Email is already registered');
     }
-	$query="Insert into user (name,email,password,mobile_no) values('".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST["name"])))))."','".mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST["email"]))))."','".md5(md5(urldecode(strip_tags($_REQUEST["pass"]))))."',".mysqli_real_escape_string($mysql,urldecode(strip_tags($_REQUEST["mobile"]))).");";
+	$query="Insert into user (name,email,password,mobile_no) values('".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST["name"])))))."','".mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST["email"]))))."','".md5(md5(urldecode(($_REQUEST["pass"]))))."',".mysqli_real_escape_string($mysql,urldecode(strip_tags($_REQUEST["mobile"]))).");";
 	$result=mysqli_query($mysql,$query)
              or die(mysqli_error($mysql));
     $query="Select id from user where email='".trim(urldecode(strip_tags($_REQUEST["email"])))."';";

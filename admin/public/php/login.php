@@ -4,7 +4,7 @@ try{
 if( isset($_REQUEST["pass"]) && isset($_REQUEST["email"]) )
 {
 		require_once("connect.php");
-		$query="Select id from user where email='".trim(urldecode(strip_tags($_REQUEST["email"])))."' and password='".md5(md5(urldecode(strip_tags($_REQUEST["pass"]))))."';";
+		$query="Select id from user where email='".trim(urldecode(strip_tags($_REQUEST["email"])))."' and password='".md5(md5(urldecode(($_REQUEST["pass"]))))."';";
 		$result=mysqli_query($mysql,$query)
 		or die("Error Occured");
 		if(mysqli_num_rows($result) > 0)
