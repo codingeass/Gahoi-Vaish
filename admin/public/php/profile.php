@@ -14,7 +14,7 @@
   <div class="container-fluid row">
   <div class="media col-md-8">
     <div class="media-left">
-      <a href="#">
+      <a href="../../../">
         <img class="media-object" src="../img/custom-logo.png" style="max-height:70px;" alt="Gahoi Vaish Samaj">
       </a>
     </div>
@@ -212,7 +212,7 @@
           <dd><?php echo ucwords($gender); ?></dd>
           <dt>Date of Birth :</dt>
           <dd><?php echo $date_of_birth; ?></dd>
-          <dt>Lives :</dt>
+          <dt>Address :</dt>
           <dd><?php echo ucwords($address) . ', '. ucwords($city) . ', '.ucwords($state).'- '.ucwords($pincode); ?></dd>
           <dt>Mobile No. :</dt>
           <dd><?php echo $mobile; ?></dd>
@@ -504,7 +504,7 @@
 
   </div>
 <div class="container-fluid" style="padding-bottom:0px;position:fixed;bottom:0px;">
-    <div class="panel panel-footer" style="margin-bottom:0px;">@Copyright theviralfever</div>
+    <div class="panel panel-footer" style="margin-bottom:0px;">@Copyright Gahoi Vaish Samaj</div>
   </div>
 
   <script type="text/javascript" src="../js/jquery.min.js"></script>

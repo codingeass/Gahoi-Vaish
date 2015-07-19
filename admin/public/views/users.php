@@ -1,6 +1,7 @@
 <div style="margin-top:50px;">            
             <div class="form-group">
                   <h3><div class="text-center" id="Login_header_text">Allow Users &nbsp; <span class="glyphicon glyphicon-refresh" style="cursor:pointer;" onclick="display_allow_user_section()"></span></div></h3>
+                  <h5 style="color:red;">* Verify when you know them only.</h5>
             </div>
 
           <div class="row">
@@ -29,8 +30,8 @@
 	      									<td><?php echo $res_sub['name']; ?></td>
 					 						<td><?php echo $res_sub['email']; ?></td>
 					 						<td><?php echo $res_sub['mobile_no']; ?></td>
-					 						<td><span class="glyphicon glyphicon-ok" style="color:green;cursor:pointer;" onclick="verify_account('<?php echo $res['idverification']; ?>',this)"></span> &nbsp;&nbsp;
-					 							<span class="glyphicon glyphicon-remove" style="color:red;cursor:pointer;" onclick="delete_account('<?php echo $res['idverification']; ?>',this)"></span>
+					 						<td><span class="glyphicon glyphicon-ok" style="color:green;cursor:pointer;" onclick="verify_account('<?php echo $res['idverification']; ?>',this)"></span>
+					 							<!--<span class="glyphicon glyphicon-remove" style="color:red;cursor:pointer;" onclick="delete_account('<?php echo $res['idverification']; ?>',this)"></span>-->
 					 						</td>
 					 						<td></td>
 

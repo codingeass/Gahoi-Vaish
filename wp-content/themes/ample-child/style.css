@@ -22,3 +22,13 @@ Version : 1.0
    text-align: center;
    background-color:white; !important  
 }
+
+.header-post-title-container{
+	padding: 20px 0;
+}
+.ngg-breadcrumbs .ngg-breadcrumb{
+	font-size: 20px;
+} 
+.ngg-album-compact h4 .ngg-album-desc{
+	font-size: 20px;
+}

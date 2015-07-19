@@ -14,7 +14,7 @@
   <div class="container row">
   <div class="media col-md-10">
     <div class="media-left">
-      <a href="#">
+      <a href="../../../">
         <img class="media-object" src="../img/custom-logo.png" style="max-height:70px;" alt="Gahoi Vaish Samaj">
       </a>
     </div>
@@ -54,7 +54,7 @@
             </div>
            
            <div class="form-group">
-                <label for="ConfirmPassword" class="col-sm-2 control-label">Confirm Password</label>
+                <label for="inputConfirmPassword" class="col-sm-2 control-label">Confirm Password</label>
                 <div class="col-sm-10">
                   <input type="password" class="form-control" id="inputConfirmPassword" placeholder="confirmPassword" required>
                 </div>
@@ -62,8 +62,8 @@
 
             <div class="form-group text-center">
               <div class="">
-                <button  class="btn btn-primary btn-lg" onclick="cancel_passchange()" id="cancel_passchange">Cancel</button>
-                <button  class="btn btn-primary btn-lg" onclick="passchange()" id="confirm_passchange" style="display:inline-block;">Confirm</button>
+                <a  class="btn btn-primary btn-lg" href="../../index.html" id="cancel_passchange">Cancel</a>
+                <button  class="btn btn-primary btn-lg" onclick="rec_passchange()" id="confirm_passchange" style="display:inline-block;">Confirm</button>
               </div>
             </div>
             <?php

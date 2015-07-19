@@ -50,17 +50,20 @@
           }
           catch(Exception $en)
           { 
-            echo "Mailing Problem";
+            echo "<script>alert('Mailing Problem')</script>";
           }
 
     }
       else{
-     echo "Invalid Email";
+     echo "<script>alert('Email Not Found')</script>";
+      echo "<script>window.location.assign('../views/passwordRecovery.html');</script>";
       }  
   }else{
-     echo "Try Again Later"; 
+     echo "<script>alert('Try Again Later')</script>"; 
  }
 	} catch (Exception $e) {
-		echo $e->message;
+		echo "<script>alert('".$e->message."')</script>";
 	}
+echo "<script>window.location.assign('../../index.html');</script>";
+
 ?>

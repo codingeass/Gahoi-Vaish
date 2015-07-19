@@ -36,7 +36,7 @@ function login_user(){
           else
           if(xmlhttp.responseText=="3")
           {
-            document.getElementById('error_message').innerHTML="Check you account for activation Email";
+            document.getElementById('error_message').innerHTML="Check you account for activation Email <br/>or <div onclick=\"resend_confirm_code('"+email+"')\">Click here to resend</div>";
           }
           else
           {
@@ -356,6 +356,101 @@ function delete_account(id)
         if(xmlhttp.readyState==4 && xmlhttp.status==200)
           {
              var xmlDoc=xmlhttp.responseText;
+          }
+      }
+    } 
+}
+
+function rec_passchange(){
+  npass=document.getElementById("inputConfirmPassword").value;
+  ncpass=document.getElementById("inputPassword").value;
+  email=document.getElementById("inputEmail").value;
+  code=document.getElementById("inputCode").value;
+  if(npass!=ncpass)
+  {
+    document.getElementById("error_message_p").innerHTML="Password Don't Match";  
+    return;
+  }
+  if(npass.length<6)
+  {
+    document.getElementById('error_message_p').innerHTML="Password must be atleast 6 characters";
+    return;
+  }
+
+  var xmlhttp=false;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if(xmlhttp)
+    {
+      xmlhttp.open("GET",'Change_password_out.php?pass='+encodeURIComponent(npass)+'&email='+encodeURIComponent(email)+'&code='+encodeURIComponent(code));
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+            document.getElementById('error_message_p').innerHTML=xmlhttp.responseText;
+            if(xmlhttp.responseText=="Updated Successfully")
+              window.location="../../index.html";
+          }
+      }
+    }
+ 
+}
+
+function resend_confirm_code(email)
+{
+ var xmlhttp=false;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if(xmlhttp)
+    {
+      xmlhttp.open("GET",'public/php/resendConfirm.php?email='+encodeURIComponent(email));
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+            document.getElementById('error_message_p').innerHTML=xmlhttp.responseText;
+            if(xmlhttp.responseText=="Updated Successfully")
+              window.location="../../index.html";
+          }
+      }
+    } 
+}
+
+function check_session()
+{
+ var xmlhttp=false;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if(xmlhttp)
+    {
+      xmlhttp.open("GET",'public/php/sessionc.php');
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+            if(xmlhttp.responseText=="started")
+              window.location="public/php/profile.php";
           }
       }
     } 

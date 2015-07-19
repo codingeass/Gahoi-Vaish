@@ -5,7 +5,7 @@
     
     if (isset($_REQUEST['id'])) {
       $id=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST['id']))));
-      $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."' and privileges=1;");
+      $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."' and privileges=2;");
       if(mysqli_num_rows($result) > 0){
         $query="delete from user where id=".$id."";
         $res=mysqli_query($mysql,$query)
