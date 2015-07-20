@@ -4,16 +4,25 @@
     session_start();
     
     if (isset($_REQUEST['id'])) {
-      $id=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST['id']))));
-      $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."' and privileges=1;");
+      $id=mysqli_real_escape_string($mysql,mysqli_real_escape_string($mysql,trim(strip_tags(urldecode($_REQUEST['id'])))));
+      $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."';");
       if(mysqli_num_rows($result) > 0){
         $query="update verification set `verified`=1 where idverification=".$id."";
         $res=mysqli_query($mysql,$query)
         or die("Already verified");
         $confirm_code=0;
+        $email1="";
+        $name="";
         $result_sub=mysqli_query($mysql,"SELECT * FROM verification WHERE idverification=".$id."");
-        while ($res_sub=mysqli_fetch_assoc($result)) {
+        while ($res_sub=mysqli_fetch_assoc($result_sub)) {
           $confirm_code=$res_sub['verification_code'];
+          $id_sub=$res_sub['idverification'];
+          $result_sub1=mysqli_query($mysql,"SELECT email,name FROM user WHERE id=".$id_sub."");
+          while ($res_sub1=mysqli_fetch_assoc($result)) {
+            $email1=$res_sub1['email'];
+            $name=$res_sub1['name'];
+            break;
+          }
           break;
         }
         try
@@ -33,7 +42,7 @@
             $mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
             $mail->setFrom('kiritoamandeep2@gmail.com', 'Gahoi Vaish Samaj');     //Set who the message is to be sent from
             //$mail->addReplyTo('amandeeptheviper@gmail.com', 'First Last');  //Set an alternative reply-to address
-            $mail->addAddress($_REQUEST["em"], $_REQUEST["na"]);  // Add a recipient
+            $mail->addAddress($email1,$name);  // Add a recipient
             $mail->addAddress('');               // Name is optional
             $mail->addCC('');
             $mail->addBCC('');
@@ -65,7 +74,7 @@
       }
       else
       {
-        echo "You Don't have Privilages"
+        echo "You Don't have Privilages";
       }
     }
     else

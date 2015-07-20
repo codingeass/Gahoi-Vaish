@@ -2,9 +2,10 @@
 
 try{
 if( isset($_REQUEST["pass"]) && isset($_REQUEST["email"]) )
-{
+{	
 		require_once("connect.php");
-		$query="Select id from user where email='".trim(urldecode(strip_tags($_REQUEST["email"])))."' and password='".md5(md5(urldecode(($_REQUEST["pass"]))))."';";
+		$email=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST["email"]))));
+		$query="Select id from user where email='".$email."' and password='".md5(md5(urldecode($_REQUEST["pass"])))."';";
 		$result=mysqli_query($mysql,$query)
 		or die("Error Occured");
 		if(mysqli_num_rows($result) > 0)
@@ -26,7 +27,7 @@ if( isset($_REQUEST["pass"]) && isset($_REQUEST["email"]) )
 					}
 				}
 				session_start();
-				$_SESSION["email"] = strip_tags($_REQUEST["email"]);
+				$_SESSION["email"] = $email;
 				$_SESSION["logti"]=time();
 				$_SESSION["uuid"]=md5($_SESSION["logti"].strip_tags($_REQUEST["pass"]));			
 				$_SESSION["id"]=$res['id'];			

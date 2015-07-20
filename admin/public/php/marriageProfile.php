@@ -2,9 +2,8 @@
   try {
     require_once("connect.php");///? check for this
     session_start();
-    if(isset($_REQUEST["search_val"])){
-      $search_val=mysqli_real_escape_string($mysql,trim(strtolower(strip_tags(urldecode($_REQUEST["search_val"])))));
-    $result=mysqli_query($mysql,"SELECT `email`,`image_location`,name,residence_city,residence_state FROM user WHERE `name` like '%".$search_val."%' Or `email` like '%".$search_val."%'");
+    {
+    $result=mysqli_query($mysql,"SELECT `email`,`image_location`,name,residence_city,residence_state FROM user natural join marriage where allow=1 ");
     echo '<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE searchProfile [
 <!ELEMENT search_result (profile , email , image , name , address)>
@@ -30,9 +29,7 @@
      echo "";
       }  
       echo "</search_result>";
-  }else{
-     echo "Invalid Value"; 
- }
+  }
   } catch (Exception $e) {
     
   }

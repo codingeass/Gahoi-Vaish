@@ -6,7 +6,6 @@
       $code=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST['code']))));
       $result=mysqli_query($mysql,"SELECT * FROM verification WHERE `idverification`='".$id."' and verification_code='".$code."';");
       if(mysqli_num_rows($result) > 0){
-        $id=0;
         while ($res=mysqli_fetch_assoc($result)) {
           if($res['verified']==1)
           {
@@ -14,16 +13,12 @@
           }
           break;
         }
-          }
-          catch(Exception $en)
-          { 
-            echo "Not verified Yet";
-          }
+          
 
       }
       else
       {
-        echo "Error occurred"
+        echo "Error occurred";
       }
     }
     else
@@ -32,4 +27,5 @@
   } catch (Exception $e) {
     echo "Error occurred";
   }
+  echo "<script>window.location='../../index.html';</script>";
 ?>

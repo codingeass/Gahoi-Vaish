@@ -35,21 +35,21 @@ if(isset($_REQUEST['sex'])){
 if(isset($_REQUEST['inputCity'])){
 	if($_REQUEST['inputCity']!="")
 	{
-		$query="update user set residence_city='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputCity'])))))."' where email='".$email."'";
+		$query="update user set residence_city='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputCity'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }
 if(isset($_REQUEST['inputState'])){
 	if($_REQUEST['inputState']!="")
 	{
-		$query="update user set `residence_state`='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputState'])))))."' where email='".$email."'";
+		$query="update user set `residence_state`='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputState'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }
 if(isset($_REQUEST['inputAddress'])){
 	if($_REQUEST['inputAddress']!="")
 	{
-		$query="update user set `residence_address`='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputAddress'])))))."' where email='".$email."'";
+		$query="update user set `residence_address`='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputAddress'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }
@@ -65,21 +65,21 @@ if(isset($_REQUEST['inputFH'])){
 if(isset($_REQUEST['inputGotra'])){
 	if($_REQUEST['inputGotra']!="")
 	{
-		$query="update user set `gotra`='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputGotra'])))))."' where email='".$email."'";
+		$query="update user set `gotra`='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputGotra'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }
 if(isset($_REQUEST['inputAakana'])){
 	if($_REQUEST['inputAakana']!="")
 	{
-		$query="update user set `aakana`='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputAakana'])))))."' where email='".$email."'";
+		$query="update user set `aakana`='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputAakana'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }
 if(isset($_REQUEST['inputDomicile'])){
 	if($_REQUEST['inputDomicile']!="")
 	{
-		$query="update user set `domicile`='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputDomicile'])))))."' where email='".$email."'";
+		$query="update user set `domicile`='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputDomicile'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }
@@ -93,21 +93,21 @@ if(isset($_REQUEST['inputBlood'])){
 if(isset($_REQUEST['inputEducation'])){
 	if($_REQUEST['inputEducation']!="")
 	{
-		$query="update user set `Education`='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputEducation'])))))."' where email='".$email."'";
+		$query="update user set `Education`='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputEducation'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }
 if(isset($_REQUEST['inputOccupation'])){
 	if($_REQUEST['inputOccupation']!="")
 	{
-		$query="update user set `Occupation`='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputOccupation'])))))."' where email='".$email."'";
+		$query="update user set `Occupation`='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputOccupation'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }
 if(isset($_REQUEST['inputCompany'])){
 	if($_REQUEST['inputCompany']!="")
 	{
-		$query="update user set `company_name`='".mysqli_real_escape_string($mysql,trim((urldecode(strip_tags($_REQUEST['inputCompany'])))))."' where email='".$email."'";
+		$query="update user set `company_name`='".mysqli_real_escape_string($mysql,trim(strtolower(urldecode(strip_tags($_REQUEST['inputCompany'])))))."' where email='".$email."'";
 		$result=mysqli_query($mysql,$query);
 	}
 }

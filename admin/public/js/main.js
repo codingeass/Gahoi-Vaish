@@ -36,7 +36,7 @@ function login_user(){
           else
           if(xmlhttp.responseText=="3")
           {
-            document.getElementById('error_message').innerHTML="Check you account for activation Email <br/>or <div onclick=\"resend_confirm_code('"+email+"')\">Click here to resend</div>";
+            document.getElementById('error_message').innerHTML="Check you account for activation Email <br/>or <div onclick=\"resend_confirm_code('"+email+"')\" style='cursor:pointer;'>Click here to resend</div>";
           }
           else
           {
@@ -104,7 +104,7 @@ function login_register(){
         {
           if(xmlhttp.responseText=="1")
           {
-            alert("Register Yourself");
+            document.getElementById('error_message').innerHTML="Wait until your account is verified."
           }
           else
           {
@@ -208,10 +208,15 @@ function profile_search()
              var xmlDoc = jQuery.parseXML(xmlhttp.responseText);
              //xd=xmlDoc.getElementsByTagName("search_result");
              x=xmlDoc.getElementsByTagName("profile");
-            var mk="";
+            var mk="<div>";
             for (i=0;i<x.length;i++)
             {
-              mk+='<div class="media" >\
+              if(i%4==0)
+              {
+                mk+="</div>"
+                mk+="<div class='row'>"
+              }
+              mk+='<div class="col-md-6"><div class="media" >\
   <a class="pull-left" onclick="view_other_profile(\''+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'\')" href="#">\
     <img class="media-object" height="50px;" src="../img/profile/'+x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue+'" alt="profile">\
   </a>\
@@ -219,9 +224,9 @@ function profile_search()
     <h4 class="media-heading" style="cursor:pointer;" onclick="view_other_profile(\''+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'\')">'+x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue+'</h4>\
     '+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'<br/>'+x[i].getElementsByTagName("address")[0].childNodes[0].nodeValue+'\
   </div>\
-</div>';
+</div></div>';
     }
-            document.getElementById('display_search_result').innerHTML=mk;
+            document.getElementById('display_search_result').innerHTML=mk+"</div>";
           }
       }
     }
@@ -286,33 +291,12 @@ function view_other_profile(email){
   content_change('otherProfile',"php?email="+email);
 }
 
-function verify_account(id)
+function verify_account(id,obj)
 {
-    var xmlhttp=false;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    if(xmlhttp)
-    {
-      xmlhttp.open("GET",'approve.php?id='+id);
-      xmlhttp.send();
-      xmlhttp.onreadystatechange=function()
-      {
-        if(xmlhttp.readyState==4 && xmlhttp.status==200)
-          {
-             var xmlDoc=xmlhttp.responseText;
-          }
-      }
-    }  
-}
+  if(obj.innerHTML=="Verified")
+      return;
+    obj.innerHTML="Verified";
 
-function verify_account(id)
-{
     var xmlhttp=false;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -324,7 +308,7 @@ function verify_account(id)
     }
     if(xmlhttp)
     {
-      xmlhttp.open("GET",'approve.php?id='+id);
+      xmlhttp.open("GET",'../php/approve.php?id='+id);
       xmlhttp.send();
       xmlhttp.onreadystatechange=function()
       {
@@ -395,6 +379,7 @@ function rec_passchange(){
         if(xmlhttp.readyState==4 && xmlhttp.status==200)
           {
             document.getElementById('error_message_p').innerHTML=xmlhttp.responseText;
+            window.location="../../index.html";
             if(xmlhttp.responseText=="Updated Successfully")
               window.location="../../index.html";
           }
@@ -454,4 +439,95 @@ function check_session()
           }
       }
     } 
+}
+
+function display_search_matrimonial_section()
+{   
+  document.getElementById('display_profile_section').style.display="none";
+  document.getElementById('edit_profile_section').style.display="none";
+  document.getElementById('change_password_section').style.display="none"; 
+  document.getElementById('wall_display_section').style.display="none";
+  content_change('marriage_section',"html");
+    var xmlhttp=false;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if(xmlhttp)
+    {
+      xmlhttp.open("GET",'marriageProfile.php');
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+             //var xmlDoc=xmlhttp.responseText;
+             var xmlDoc = jQuery.parseXML(xmlhttp.responseText);
+             //xd=xmlDoc.getElementsByTagName("search_result");
+             x=xmlDoc.getElementsByTagName("profile");
+            var mk="<div>";
+            for (i=0;i<x.length;i++)
+            {
+              if(i%4==0)
+              {
+                mk+="</div>"
+                mk+="<div class='row'>"
+              }
+              mk+='<div class="col-md-6"><div class="media" >\
+  <a class="pull-left" onclick="view_other_profile(\''+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'\')" href="#">\
+    <img class="media-object" height="50px;" src="../img/profile/'+x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue+'" alt="profile">\
+  </a>\
+  <div class="media-body">\
+    <h4 class="media-heading" style="cursor:pointer;" onclick="view_other_profile(\''+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'\')">'+x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue+'</h4>\
+    '+x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue+'<br/>'+x[i].getElementsByTagName("address")[0].childNodes[0].nodeValue+'\
+  </div>\
+</div></div>';
+    }
+            document.getElementById('display_search_result').innerHTML=mk+"</div>";
+          }
+      }
+    }
+}
+
+function edit_matrimonial_section(){
+  document.getElementById('display_profile_section').style.display="none";
+  document.getElementById('edit_profile_section').style.display="none";
+  document.getElementById('change_password_section').style.display="none"; 
+  document.getElementById('wall_display_section').style.display="none";
+  content_change('allowmarriage',"php");
+}
+
+function marriage_status_update(){
+  var allow=0;
+  if(document.getElementById('marriage1').checked)
+  {
+    allow=1;
+  }
+  
+    var xmlhttp=false;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if(xmlhttp)
+    {
+      xmlhttp.open("GET",'allowMarriage_update.php?allow='+allow);
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+            document.getElementById('display_search_result').innerHTML=xmlhttp.responseText;
+          }
+      }
+    }
+
 }

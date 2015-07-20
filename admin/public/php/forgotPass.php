@@ -39,7 +39,7 @@
     require_once("connect.php");
     if(isset($_REQUEST["code"])&&isset($_REQUEST["email"])){
 
-    $result=mysqli_query($mysql,"SELECT * FROM password_recovery WHERE `email`='".urldecode(strip_tags($_REQUEST["email"]))."' and code='".strip_tags(urldecode($_REQUEST["code"]))."'");
+    $result=mysqli_query($mysql,"SELECT * FROM password_recovery WHERE `email`='".mysqli_real_escape_string($mysql,urldecode(strip_tags($_REQUEST["email"])))."' and code='".mysqli_real_escape_string($mysql,strip_tags(urldecode($_REQUEST["code"])))."'");
     if(mysqli_num_rows($result) > 0){
       ?>
 
@@ -66,28 +66,29 @@
                 <button  class="btn btn-primary btn-lg" onclick="rec_passchange()" id="confirm_passchange" style="display:inline-block;">Confirm</button>
               </div>
             </div>
+            <div class="form-group text-center" id="error_message_p" style="font-size:18px;color:red;">
             <?php
     }
       else{
         ?>
-        <div class="form-group text-center" id="error_message" style="font-size:18px;color:red;">
+        <div class="form-group text-center" id="error_message_p" style="font-size:18px;color:red;">
         <?php
      echo "Invalid Code";
       }  
   }else{
     ?>
-        <div class="form-group text-center" id="error_message" style="font-size:18px;color:red;">
+        <div class="form-group text-center" id="error_message_p" style="font-size:18px;color:red;">
         <?php
      echo "Try Again Later"; 
  }
   } catch (Exception $e) {
     ?>
-        <div class="form-group text-center" id="error_message" style="font-size:18px;color:red;">
+        <div class="form-group text-center" id="error_message_p" style="font-size:18px;color:red;">
         <?php
     echo $e->message;
   }
 ?>
-           </div>
+         </div>
         </form>
         <hr/>
 

@@ -53,6 +53,7 @@
            echo wp_get_attachment_image( $attachment->ID, 'full',1,$custom_attr_addition );
            echo '<p>';
            echo apply_filters( 'the_title', $attachment->post_title );
+           echo "<br/>".apply_filters('the_caption',$attachment->post_excerpt);
            echo '</p></div>';
 
           }

@@ -12,12 +12,12 @@
  						<th>Email</th>
  						<th>Mobile</th>
  						<th>Allow User</th>
- 						<th>#</th>
+ 						<!--<th>#</th>-->
  					</tr>
  						<?php
  							require("../php/sessionv.php");
 							require("../php/connect.php");
- 							$result1=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."' and privileges=1;");
+ 							$result1=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."';");
       						if(mysqli_num_rows($result1) > 0){
       							$result=mysqli_query($mysql,"SELECT idverification FROM verification WHERE `verified`= 0;");
       							if(mysqli_num_rows($result) > 0)
@@ -33,7 +33,7 @@
 					 						<td><span class="glyphicon glyphicon-ok" style="color:green;cursor:pointer;" onclick="verify_account('<?php echo $res['idverification']; ?>',this)"></span>
 					 							<!--<span class="glyphicon glyphicon-remove" style="color:red;cursor:pointer;" onclick="delete_account('<?php echo $res['idverification']; ?>',this)"></span>-->
 					 						</td>
-					 						<td></td>
+					 						<!--<td></td>-->
 
 					 						<?php
 	      									break;

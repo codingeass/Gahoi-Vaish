@@ -2,7 +2,7 @@
 	try {
     require_once("../php/connect.php");///? check for this
     session_start();
-    
+    die();
     if (isset($_REQUEST['id'])) {
       $id=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST['id']))));
       $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."' and privileges=2;");

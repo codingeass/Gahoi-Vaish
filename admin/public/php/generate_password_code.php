@@ -2,10 +2,11 @@
 	try {
     require_once("connect.php");
     if(isset($_REQUEST["email"])){
-    $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".urldecode(strip_tags($_REQUEST["email"]))."' ;");
+    $email=mysqli_real_escape_string($mysql,strip_tags(urldecode($_REQUEST["email"])));  
+    $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".$email."' ;");
     if(mysqli_num_rows($result) > 0){
         $confirm_code=md5(uniqid(rand()));
-        $result=mysqli_query($mysql,"insert into password_recovery (email,code) values('".urldecode(strip_tags($_REQUEST["email"]))."','".$confirm_code."')");        
+        $result=mysqli_query($mysql,"insert into password_recovery (email,code) values('".$email."','".$confirm_code."')");        
         
         try
         {
@@ -24,7 +25,7 @@
             $mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
             $mail->setFrom('kiritoamandeep2@gmail.com', 'Gahoi Vaish Samaj');     //Set who the message is to be sent from
             //$mail->addReplyTo('amandeeptheviper@gmail.com', 'First Last');  //Set an alternative reply-to address
-            $mail->addAddress($_REQUEST["em"], $_REQUEST["na"]);  // Add a recipient
+            $mail->addAddress($email, "");  // Add a recipient
             $mail->addAddress('');               // Name is optional
             $mail->addCC('');
             $mail->addBCC('');

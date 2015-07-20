@@ -11,7 +11,7 @@
   
   <div class="jumbotron" id="small_jumbotron">
     
-  <div class="container-fluid row">
+  <div class="container-fluid row" style="margin-right:0px;">
   <div class="media col-md-8">
     <div class="media-left">
       <a href="../../../">
@@ -19,7 +19,7 @@
       </a>
     </div>
     <div class="media-body">
-      <h2 class="media-heading" style="inline-block">Gahoi Vaish Samaj</h2>
+      <h2 class="media-heading" style="display:inline-block;margin-top:15px;">Gahoi Vaish Samaj</h2>
     </div>
   </div>
 
@@ -48,6 +48,7 @@
             $gender="";
 
           $email=$res['email'];
+
           if($res['Marital Status']=='1')
           {
             $marital="Married";
@@ -69,7 +70,6 @@
             $marital="";
           else  
             $marital="";
-
           $date_of_birth=$res['date_of_birth'];
           $fatherHus=$res['Father_husband'];
           $domicile=$res['domicile'];
@@ -106,7 +106,7 @@
   ?>
 
     <div class="col-md-4">
-  <div class="btn-group" role="group" style="float:right;">
+  <div class="btn-group" role="group" style="float:right;padding-right:70px;">
       <a type="button" class="btn btn-default" id="img_button" href=""><img class="media-object" src="../img/profile/<?php echo $image; ?>" alt="profile picture" style="height:50px;"></a>
       <div class="btn-group">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -114,10 +114,10 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li><a href="#" onclick="Edit_profile()">Edit Profile</a></li>
-        <li><a href="#" onclick="Change_password()">Change Passowrd</a></li>
+        <li><a href="#" onclick="Change_password()">Change Password</a></li>
         <li><a href="logout.php">Logout</a></li>
         <li class="divider"></li>
-        <li><a href="#">Policy</a></li>
+        <!--<li><a href="#">Policy</a></li>-->
       </ul>
      </div>
   </div>
@@ -162,14 +162,14 @@
       </a>
       </li>
 
-      <li class="active" onclick="display_allow_user_section()">
+      <li class="active" onclick="display_search_matrimonial_section()">
       <a href="#">
         <span class="badge pull-left"></span>
-        <span class="glyphicon glyphicon-trash"></span> Delete Users
+        <span class="glyphicon glyphicon-list-alt"></span> Matrimonial List
       </a>
       </li>
 
-      <li class="active" style="display:none">
+      <li class="active" onclick="edit_matrimonial_section()">
       <a href="#">
         <span class="badge pull-right"></span>
           <span class="glyphicon glyphicon-user"></span> Matrimonial Info
@@ -312,7 +312,7 @@
                     <div class="form-group">
                       <label for="inputEducation" class="col-sm-3 control-label">Education</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEducation" name="inputEducation" placeholder="Full Name" value="<?php echo ($education); ?>">
+                        <input type="text" class="form-control" id="inputEducation" name="inputEducation" placeholder="B.Tech" value="<?php echo ($education); ?>">
                       </div>
                     </div>
 
@@ -368,7 +368,7 @@
                       <div class="col-sm-9">
                         <select class="form-control" id="inputMarital" name="inputMarital">
                           <?php 
-                            if(!isset($marital) || $martial=="")
+                            if($marital=="")
                             {
                                 echo "<option value='0'>--Select Marital Status--</option>";
                                 echo "<option value='1'>Married</option><option value='2'>Unmarried</option><option value='3'>Widow</option><option value='4'>Divorce</option><option value='5'>Widower</option>";

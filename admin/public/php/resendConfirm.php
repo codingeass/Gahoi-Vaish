@@ -10,8 +10,9 @@
           $id=$res['id'];
           break;
         }
+        $confirm_code=0;
         $result_sub=mysqli_query($mysql,"SELECT * FROM verification WHERE idverification=".$id."");
-        while ($res_sub=mysqli_fetch_assoc($result)) {
+        while ($res_sub=mysqli_fetch_assoc($result_sub)) {
           $confirm_code=$res_sub['verification_code'];
         }
         try
@@ -31,7 +32,7 @@
             $mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
             $mail->setFrom('kiritoamandeep2@gmail.com', 'Gahoi Vaish Samaj');     //Set who the message is to be sent from
             //$mail->addReplyTo('amandeeptheviper@gmail.com', 'First Last');  //Set an alternative reply-to address
-            $mail->addAddress($_REQUEST["em"], $_REQUEST["na"]);  // Add a recipient
+            $mail->addAddress($email, "Gahoi");  // Add a recipient
             $mail->addAddress('');               // Name is optional
             $mail->addCC('');
             $mail->addBCC('');
@@ -63,7 +64,7 @@
       }
       else
       {
-        echo "Email Not Registered"
+        echo "Email Not Registered";
       }
     }
     else
