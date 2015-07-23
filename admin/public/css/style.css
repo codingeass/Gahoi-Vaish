@@ -7,6 +7,9 @@ body {
 	margin: 0px;
 }
 
+body{
+	min-height: 100vh;
+}
 #form_login{
 	border:1px solid grey;
 	border-radius: 3px;

@@ -1,11 +1,15 @@
+<?php session_start(); ?>
 <html>
 <head>
 <link rel="stylesheet" href="../css/bootstrap.min.css"/>
 <link rel="stylesheet" href="../css/style.css"/>
 <link rel="stylesheet" href="../css/bootstrap-social.css"/>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
-<link rel="icon" type="/image/png" href="" />
-<title></title>
+<link rel="icon" type="/image/ico" href="../img/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gahoi Vaish Samaj</title>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 <body>
   
@@ -26,7 +30,6 @@
 <?php
   try{
     require_once("connect.php");
-    session_start();
     if(isset($_SESSION["email"])){
     $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."'");
     if(mysqli_num_rows($result) > 0){

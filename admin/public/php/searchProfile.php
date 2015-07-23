@@ -1,7 +1,7 @@
+<?php session_start(); ?>
 <?php
   try {
     require_once("connect.php");///? check for this
-    session_start();
     if(isset($_REQUEST["search_val"])){
       $search_val=mysqli_real_escape_string($mysql,trim(strtolower(strip_tags(urldecode($_REQUEST["search_val"])))));
     $result=mysqli_query($mysql,"SELECT `email`,`image_location`,name,residence_city,residence_state FROM user WHERE `name` like '%".$search_val."%' Or `email` like '%".$search_val."%'");

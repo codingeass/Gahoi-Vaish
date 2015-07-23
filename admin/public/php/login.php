@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php
 
 try{
@@ -26,7 +27,6 @@ if( isset($_REQUEST["pass"]) && isset($_REQUEST["email"]) )
 						die();
 					}
 				}
-				session_start();
 				$_SESSION["email"] = $email;
 				$_SESSION["logti"]=time();
 				$_SESSION["uuid"]=md5($_SESSION["logti"].strip_tags($_REQUEST["pass"]));			

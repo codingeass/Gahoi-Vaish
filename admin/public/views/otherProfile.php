@@ -1,7 +1,6 @@
 <?php
 	try {
     require_once("../php/connect.php");///? check for this
-    session_start();
     if(isset($_REQUEST["email"])){
     $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_REQUEST["email"])."'");
     if(mysqli_num_rows($result) > 0){

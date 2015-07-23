@@ -1,7 +1,7 @@
+<?php session_start(); ?>
 <?php
 	try {
     require_once("../php/connect.php");///? check for this
-    session_start();
     die();
     if (isset($_REQUEST['id'])) {
       $id=mysqli_real_escape_string($mysql,trim(urldecode(strip_tags($_REQUEST['id']))));

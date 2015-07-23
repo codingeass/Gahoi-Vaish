@@ -1,7 +1,7 @@
+<?php session_start(); ?>
 <?php
   try {
     require_once("connect.php");///? check for this
-    session_start();
     {
     $result=mysqli_query($mysql,"SELECT `email`,`image_location`,name,residence_city,residence_state FROM user natural join marriage where allow=1 ");
     echo '<?xml version="1.0" encoding="utf-8" standalone="no"?>

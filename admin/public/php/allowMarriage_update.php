@@ -1,8 +1,7 @@
-
+<?php session_start(); ?>
 <?php
   try {
     require_once("../php/connect.php");///? check for this
-    session_start();
     if(isset($_REQUEST['allow']))
     $result=mysqli_query($mysql,"SELECT allow FROM marriage where id= ".$_SESSION['id'].";");
     $type=0;

@@ -1,3 +1,4 @@
+<?php require("../php/sessionv.php"); ?>
 <div style="margin-top:50px;">            
             <div class="form-group">
                   <h3><div class="text-center" id="Login_header_text">Allow Users &nbsp; <span class="glyphicon glyphicon-refresh" style="cursor:pointer;" onclick="display_allow_user_section()"></span></div></h3>
@@ -15,7 +16,6 @@
  						<!--<th>#</th>-->
  					</tr>
  						<?php
- 							require("../php/sessionv.php");
 							require("../php/connect.php");
  							$result1=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."';");
       						if(mysqli_num_rows($result1) > 0){

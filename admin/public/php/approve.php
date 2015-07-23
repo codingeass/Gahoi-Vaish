@@ -1,8 +1,7 @@
+<?php session_start(); ?>
 <?php
 	try {
     require_once("../php/connect.php");///? check for this
-    session_start();
-    
     if (isset($_REQUEST['id'])) {
       $id=mysqli_real_escape_string($mysql,mysqli_real_escape_string($mysql,trim(strip_tags(urldecode($_REQUEST['id'])))));
       $result=mysqli_query($mysql,"SELECT * FROM user WHERE `email`='".strip_tags($_SESSION["email"])."';");
